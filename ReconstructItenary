@@ -1,0 +1,53 @@
+import java.util.HashMap;
+//Date: 03/04/2024
+//https://www.geeksforgeeks.org/find-itinerary-from-a-given-list-of-tickets/
+public class Main
+{
+	public static void main(String[] args) {
+		System.out.println("Hello World");
+		HashMap<String,String> trip = new HashMap<>();
+		trip.put("Chennai","Bangalore");
+		trip.put("Bombay","Delhi");
+		trip.put("Goa","Chennai");
+		trip.put("Delhi","Goa");
+	
+	itenaryUsingTickets(trip);
+	}
+	public static void itenaryUsingTickets(HashMap<String,String> trip) {
+	  HashMap<String,Boolean> potentialStartingPoint = new HashMap<>();
+	  
+	  for(String source : trip.keySet()){
+	      String destination = trip.get(source);
+	      //destination can never be a 1st starting point
+	      potentialStartingPoint.put(destination,false);
+	      
+	      //if our potentialStartingPoint doesnt contain source than it may be a starting point
+	      if(!potentialStartingPoint.containsKey(source)){
+	          potentialStartingPoint.put(source,true);
+	      }
+	  }
+	  
+	  
+	  //Find the starting point from potentialStartingPoint hashMap we just created
+	  //There will only one value that is marked true , we just have to find the value
+	  String startingPoint = "";
+	  for(String element : potentialStartingPoint.keySet()){
+	      boolean val = potentialStartingPoint.get(element);
+	      if(val){
+	          startingPoint = element;
+	          break;
+	      }
+	  }
+	  
+	  while(true){
+	      if(potentialStartingPoint.containsKey(startingPoint)){
+	          System.out.print(startingPoint + "-->");
+	          startingPoint = trip.get(startingPoint);
+	      }else{
+	          System.out.print("END");
+	          break;
+	      }
+	  }
+
+    }
+}
