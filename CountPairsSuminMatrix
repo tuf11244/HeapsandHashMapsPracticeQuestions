@@ -1,0 +1,30 @@
+
+//https://www.geeksforgeeks.org/problems/count-pairs-sum-in-matrices4332
+//Date: 03/16/2024
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+		System.out.println("Hello World");
+	
+	}
+	
+	public static int countPairs(int mat1[][], int mat2[][], int n, int x) {
+       HashSet<Integer> set = new HashSet<>();
+       
+       for(int i =0; i < mat1.length;i++){
+           for(int j = 0; j < mat1[0].length;j++){
+               set.add(mat1[i][j]);
+           }
+       }
+       int count = 0;
+       for(int i = 0; i < mat2.length;i++){
+           for(int j =0; j < mat2[0].length;j++){
+               if(set.contains(x-mat2[i][j])){
+                   count++;
+               }
+           }
+       }
+       return count;
+    }
+}
