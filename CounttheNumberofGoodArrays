@@ -1,0 +1,27 @@
+//https://leetcode.com/problems/count-the-number-of-good-subarrays/
+class Solution {
+    public long countGood(int[] nums, int k) {
+       HashMap<Integer,Integer> hm = new HashMap<>();
+       int j = 0;
+       long answer = 0;
+       int pairs  = 0;
+
+       for(int i = 0; i < nums.length;i++){
+        //Create a Frequency Map
+         hm.put(nums[i], hm.getOrDefault(nums[i],0)+1);
+        //Calculate the number of pairs with the same value
+        pairs = pairs + hm.get(nums[i])-1;
+
+        while(pairs >= k){
+            //Calculate the answer
+            answer = answer + (nums.length-i);
+            //Reduce the window size 
+            hm.put(nums[j],hm.get(nums[j])-1);
+            //Update the pairs also 
+            pairs = pairs - hm.get(nums[j]);
+            j++;
+        }
+       } 
+       return answer;
+    }
+}
